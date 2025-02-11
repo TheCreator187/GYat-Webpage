@@ -341,6 +341,11 @@
       $('.slider').slick('slickNext');
     });
 
+    $('.controller.dots li').on('click', function() {
+      const index = $(this).index();
+      $('.slider').slick('slickGoTo', index);
+    });
+
     $('.slider').on('afterChange', function(event, slick, currentSlide){
       $('.controller.dots li').removeClass('selected');
       $('.controller.dots li').eq(currentSlide).addClass('selected');
