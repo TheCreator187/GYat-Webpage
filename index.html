@@ -338,7 +338,9 @@
     });
 
     $('.slider img').on('click', function() {
-      $('.slider').slick('slickNext');
+      const currentSlide = $('.slider').slick('slickCurrentSlide');
+      const nextSlide = (currentSlide + 1) % $('.slider').slick('getSlick').slideCount;
+      $('.slider').slick('slickGoTo', nextSlide);
     });
 
     $('.controller.dots li').on('click', function() {
@@ -349,7 +351,6 @@
     $('.slider').on('afterChange', function(event, slick, currentSlide){
       $('.controller.dots li').removeClass('selected');
       $('.controller.dots li').eq(currentSlide).addClass('selected');
-      playAudio('#');
     });
 
     const ctx = document.getElementById('tokenomicsChart').getContext('2d');
