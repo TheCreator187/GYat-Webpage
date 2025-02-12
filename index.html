@@ -164,7 +164,7 @@
       }
     }
     .connect-wallet-button {
-      position: fixed;
+      position: absolute;
       top: 20px;
       right: 20px;
       padding: 10px 20px;
@@ -177,17 +177,10 @@
       cursor: pointer;
       z-index: 1000;
     }
-    @media (max-width: 600px) {
-      .connect-wallet-button {
-        font-size: 0.8em;
-        padding: 8px 16px;
-      }
-    }
   </style>
 </head>
 <body class="slides chain simplifiedMobile animated">
   <a id="connect-wallet" class="connect-wallet-button">Connect Wallet</a>
-  <p id="wallet-address"></p>
 		
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="logo" viewBox="0 0 106 31"><title>Slides Framework</title><path d="M17.413 14.04c-.56-5.84-5.6-7-8.52-7-4.6 0-8.6 2.92-8.6 7.52 0 3 2.4 4.88 5.28 5.8 4.24 1.64 5.88 1.84 5.88 3.36 0 1.08-1.2 1.72-2.32 1.72-.28 0-2.24 0-2.52-2.04h-6.6c.6 5.84 5.68 7.36 9.04 7.36 4.92 0 9.04-2.88 9.04-7.76 0-4.8-4-5.92-7.76-6.96-1.76-.52-3.4-1.2-3.4-2.2 0-.6.48-1.48 1.88-1.48 1.96 0 2.04 1.2 2.08 1.68h6.52z"/></symbol>
@@ -451,36 +444,6 @@
       }
     } else {
       alert('Phantom wallet not found. Please install it from https://phantom.app/');
-    }
-  });
-</script>
-<script type="module">
-  import { Connection, PublicKey } from "@solana/web3.js";
-
-  async function connectWallet() {
-    if (window.solana && window.solana.isPhantom) {
-      try {
-        const response = await window.solana.connect({ onlyIfTrusted: false });
-        document.getElementById("wallet-address").innerText = `Wallet: ${response.publicKey}`;
-      } catch (err) {
-        console.error("Wallet connection failed", err);
-      }
-    } else {
-      alert("Phantom wallet not found. Try opening this site in the Phantom Wallet browser.");
-    }
-  }
-
-  document.getElementById("connect-wallet").addEventListener("click", connectWallet);
-
-  // Automatically connect if the user is already connected
-  window.addEventListener('load', async () => {
-    if (window.solana && window.solana.isPhantom) {
-      try {
-        const response = await window.solana.connect({ onlyIfTrusted: true });
-        document.getElementById("wallet-address").innerText = `Wallet: ${response.publicKey}`;
-      } catch (err) {
-        console.error("Wallet connection failed", err);
-      }
     }
   });
 </script>
